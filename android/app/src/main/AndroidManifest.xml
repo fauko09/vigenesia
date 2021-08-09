@@ -2,9 +2,8 @@
     package="com.example.vigenesia_mobile">
      <uses-permission android:name="android.permission.INTERNET"/> <!-- Add this -->
    <application
-   
-
-        android:usesCleartextTraffic="true"
+  
+      android:usesCleartextTraffic="true"
         android:label="vigenesia"
         android:icon="@mipmap/ic_launcher">
         <activity

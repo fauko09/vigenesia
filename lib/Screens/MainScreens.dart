@@ -107,7 +107,6 @@ class _MainScreensState extends State<MainScreens> {
   @override
   void initState() {
     super.initState();
-    getData();
     getData2();
     _getData();
   }
@@ -253,13 +252,13 @@ class _MainScreensState extends State<MainScreens> {
                                             MediaQuery.of(context).size.width,
                                         child: ListView(
                                           shrinkWrap: true,
+                                          physics: ScrollPhysics(),
                                           children: [
-                                            Expanded(
-                                                child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
+                                            Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
                                                   Text(item.isiMotivasi),
                                                   Row(children: [
                                                     TextButton(
@@ -306,17 +305,16 @@ class _MainScreensState extends State<MainScreens> {
                                                       },
                                                     )
                                                   ]),
-                                                ])),
+                                                ]),
                                           ],
                                         ),
                                       ),
                                   ],
                                 );
-                              } else if (snapshot.hasData &&
-                                  snapshot.data.isEmpty) {
-                                return Text("No Data");
+                              } else if (snapshot.hasError) {
+                                return Text("${snapshot.hasError}");
                               } else {
-                                return CircularProgressIndicator();
+                                return Text("No Data");
                               }
                             })
                         : Container(),
