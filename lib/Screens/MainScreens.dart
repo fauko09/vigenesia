@@ -165,19 +165,31 @@ class _MainScreensState extends State<MainScreens> {
                       width: MediaQuery.of(context).size.width,
                       child: ElevatedButton(
                           onPressed: () async {
-                            await sendMotivasi(
-                              isiController.text.toString(),
-                            ).then((value) => {
-                                  if (value != null)
-                                    {
-                                      Flushbar(
-                                        message: "Berhasil Submit",
-                                        duration: Duration(seconds: 2),
-                                        backgroundColor: Colors.greenAccent,
-                                        flushbarPosition: FlushbarPosition.TOP,
-                                      ).show(context)
-                                    }
-                                });
+                            if (isiController.text.toString().isEmpty) {
+                              Flushbar(
+                                message: "Tidak Boleh Kosong",
+                                duration: Duration(seconds: 2),
+                                backgroundColor: Colors.redAccent,
+                                flushbarPosition: FlushbarPosition.TOP,
+                              ).show(context);
+                            } else if (isiController.text
+                                .toString()
+                                .isNotEmpty) {
+                              await sendMotivasi(
+                                isiController.text.toString(),
+                              ).then((value) => {
+                                    if (value != null)
+                                      {
+                                        Flushbar(
+                                          message: "Berhasil Submit",
+                                          duration: Duration(seconds: 2),
+                                          backgroundColor: Colors.greenAccent,
+                                          flushbarPosition:
+                                              FlushbarPosition.TOP,
+                                        ).show(context)
+                                      }
+                                  });
+                            }
 
                             _getData();
                             print("Sukses");
@@ -259,7 +271,9 @@ class _MainScreensState extends State<MainScreens> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Text(item.isiMotivasi),
+                                                  Expanded(
+                                                      child: Text(
+                                                          item.isiMotivasi)),
                                                   Row(children: [
                                                     TextButton(
                                                       child:
